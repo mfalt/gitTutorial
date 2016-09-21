@@ -1,6 +1,6 @@
-# Git Tutorial for Dummies
+# Git Tutorial
 
-This is meant as a very simple tutorial for collaborating on a paper using git/github. I will provide some background and explanation of the structure of git, but the main take-away is that you will only need 5 commands to run git `clone, add, commit, pull` and `push` and optionally `status`.
+This is meant as a very simple tutorial for collaborating on a paper using git/github. I will provide some background and explanation of the structure of git, but the main take-away is that you will only need 5 commands to run git `clone, add, commit, pull, push` and optionally `status`.
 ## Background
 I will provide a private git `repository` on my Github (https://github.com/mfalt/foundationsandtrends.git) in which we can collaborate on the paper. This repository can be `cloned` to your local computer, where you can work on the project. When you are satisfied with your changes, these can be `pushed` to the central repository, more on this later.
 Git runs locally on your computer and is used to keep track of the files and history of the project and your changes. The files are contained in a git repository which is a simple folder on your computer. 
