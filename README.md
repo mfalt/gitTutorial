@@ -156,3 +156,24 @@ git push
 * Keep the different sections in different files, this reduces the risk of conflicts.
 * Keep the lines in the file as short as possible (for example a new line after every comma and period). This makes it possible for people to edit the same paragraph without creating a conflict on the same line.
 * Push and pull regularly, to avoid large conflics.
+
+If you made some changes that you don't want to commit and push but still save some way, you can run
+```bash
+git stash save mymessage
+```
+This will stash away your changes under the name "mymessage" and reset your local state to that of the latest commit. When you want to bring them back you can run
+```bash
+git stash apply mymessage
+```
+## If you did something wrong
+If you made some local changes that you regret you can run
+```bahs
+git checkout -- <filename>
+```
+this removes your local changes in `<filename>` and replaces them with those at the latest commit. If you already run `git add` on a file, those changes will be kept.
+If you want to completely remove all of your local history, and get the current version on the server, you can run
+```bash
+git fetch origin
+git reset --hard origin/master
+```
+but remember, you will loose all local changes!
