@@ -104,7 +104,7 @@ When you are satisfied with your local changes, push them to the server
 ```bash
 git push
 ```
-you will be ased for your ssh password. If there were no changes on the server since you did your last `pull`, you will see a message containing `Writing objects:` and all your changes (that you added) will be uploaded. If there were any updates on the server, you will se a message containing
+you will be asked for your ssh password. If there were no changes on the server since you did your last `pull`, you will see a message containing `Writing objects:` and all your changes (that you added) will be uploaded. If there were any updates on the server, you will se a message containing
 ```bash
  ! [rejected]        master -> master (fetch first)
 ```
@@ -113,8 +113,8 @@ To get the recent changes, just run
 ```
 git pull
 ```
-and if there were no conflics, git will merge the updates automatically and you create a new commit for you.
-You will see an edito rwith the commit message "Merge branch 'master'", which you can edit the if you want. When you have closed the editor you can then run
+and if there were no conflics, git will merge the updates automatically and create a new commit for you.
+You will see an editor with the commit message "Merge branch 'master'", which you can edit the if you want. When you have closed the editor you can then run
 ```bash
 git push
 ```
