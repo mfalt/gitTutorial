@@ -44,8 +44,9 @@ If you are authenticating with username and password instead of ssh key, run the
 git clone https://github.com/mfalt/foundationsandtrends.git
 ```
 
-## Basic Concept (Optional)
-The repository keeps track of three trees/indexes, the `Working Directory`, `Index` and `HEAD` which will be explained below. This part may be useful to understand the concepts, but is not nessasary to understand in order to use git.
+## Basic Concept (**Optional**)
+This part may be useful to understand the concepts, but is not nessasary to understand in order to use git.
+The repository keeps track of three trees/indexes, the `Working Directory`, `Index` and `HEAD` which will be explained below. 
 You can always check the status of the repository by writing
 ```bash
 git status
@@ -74,7 +75,7 @@ git commit -m "My explanation of what I did"
 ```
 to add them to the history in the git `HEAD`. The same `add` and `commit` procedure is done when editing an existing file. Serveral changes in different files can be saved in a single `commit`.
 ## How to work with git: `pull`, `add`, `commit`, `push`
-The question now is how this is supposed to work when several people are working on changes to the project at the same time. The following workflow is recommended.
+The question now is how this is supposed to work when several people are working on changes to the project at the same time. I recommend the following workflow.
 Before making any changes, always run:
 ```bash
 git pull
@@ -84,14 +85,65 @@ Then make your changes and run
 ```bash
 git add file1.tex file2.tex
 ```
-for the files you have made changes to. The pdf file and other generated files should not be uploaded, they will only generate conflicts.
+for the files you have made changes to. **The pdf file and other generated files should not be uploaded**, they will only generate conflicts.
 Then `commit` your changes locally and add some message explaining what you did
 ```bash
 git commit -m "Updated introduction"
 ```
-You may do several changes (`add` and `commit`) locally before bushing to the server, but this increases the risk of conflics.
+You may do several changes (`add` and `commit`) locally before pushing to the server, but this increases the risk of conflics.
 When you are satisfied with your local changes, push them to the server
 ```bash
 git push
 ```
-you will be ased for your ssh password. If there were no changes on the server since you did your last `pull`, you will see a message containing `Writing objects:` and all your changes (that you added) will be uploaded. If there were 
+you will be ased for your ssh password. If there were no changes on the server since you did your last `pull`, you will see a message containing `Writing objects:` and all your changes (that you added) will be uploaded. If there were any updates on the server, you will se a message containing
+```bash
+ ! [rejected]        master -> master (fetch first)
+```
+and you will have to incorporate these changes locally before being able to push everything to the server.
+To get the recent changes, just run
+```
+git pull
+```
+and if there were no conflics, git will merge the updates automatically and you create a new commit for you.
+You will see an edito rwith the commit message "Merge branch 'master'", which you can edit the if you want. When you have closed the editor you can then run
+```bash
+git push
+```
+to send the merged changes to the server.
+If git was not able to merge the files automatically, for example if changes were made on the same row both locally and on the server, you will instead get a message containing
+```bash
+CONFLICT (content): Merge conflict in somefile.tex
+```
+You will now have to decide manually on how the conflict should be fixed.
+## Dealing with a conflict
+Open the file with the conflict and you will see something like
+```tex
+\begin{document}
+<<<<<<< HEAD
+\section{Algorithm}
+=======
+\section{Introduction}
+>>>>>>> 43951145ce03162f4ead57ce460a37a56df659d3
+\end{document}
+```
+The part after `<<<<<<< HEAD` are the changes that you made locally, and the part after `=======` were made on the server. In this case, both changes should be kept, so edit the file to how you want it to look:
+```tex
+\begin{document}
+\section{Introduction}
+\section{Algorithm}
+\end{document}
+```
+Then tell git that you have fixed the conflict in this file and create a commit telling what you did
+```shell
+git add somefile.tex
+git commit -m "Merged the changes in somefile.tex"
+```
+Now push the changes to the server
+```shell
+git push
+```
+
+## General tips
+* Keep the different sections in different files, this reduces the risk of conflicts.
+* Keep the lines in the file as short as possible (for example a new line after every comma and period). This makes it possible for people to edit the same paragraph without creating a conflict on the same line.
+* Push and pull regularly, to avoid large conflics.
