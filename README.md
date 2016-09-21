@@ -74,8 +74,17 @@ This means that git will keep track of the changes in this file, and when you ar
 git commit -m "My explanation of what I did"
 ```
 to add them to the history in the git `HEAD`. The same `add` and `commit` procedure is done when editing an existing file. Serveral changes in different files can be saved in a single `commit`.
+
 ## How to work with git: `pull`, `add`, `commit`, `push`
-The question now is how this is supposed to work when several people are working on changes to the project at the same time. I recommend the following workflow.
+The question now is how this is supposed to work when several people are working on changes to the project at the same time. I recommend the following workflow, and most of the time you will only have to do the following:
+```bash
+git pull
+# make changes
+git add myfile1.tex
+git commit -m "Some text"
+git push
+```
+but more work is sometimes needed, an explanation follows.
 Before making any changes, always run:
 ```bash
 git pull
